@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import errorImg from "../images/errorImg.jpg";
+import errorImg from "../../Others/ErrorPage/ErrorPage";
 const ErrorPage = () => {
   return (
     <div className="flex items-center h-screen p-16 bg-gray-100 text-gray-900">
