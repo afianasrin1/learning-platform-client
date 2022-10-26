@@ -1,7 +1,11 @@
 import React from "react";
 
 const Home = () => {
-  return <div>this is home</div>;
+  return (
+    <div>
+      <p>All course ekhane map korte hobe then courese component e jabe</p>
+    </div>
+  );
 };
 
 export default Home;

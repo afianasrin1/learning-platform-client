@@ -3,7 +3,7 @@ import Roots from "../Layout/Roots";
 import Blog from "../Pages/Blog/Blog";
 import Courses from "../Pages/Courses/Courses";
 import FAQs from "../Pages/FAQs/FAQs";
-import Home from "../Pages/Home/Home";
+import DefaultPage from "../DefaultPage/DefaultPage";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import ErrorPage from "../Others/ErrorPage/ErrorPage";
@@ -15,11 +15,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <DefaultPage />,
+      },
+      {
+        path: "/home",
+        element: <DefaultPage />,
       },
       {
         path: "/",
-        element: <Courses></Courses>,
+        element: <Courses />,
       },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
