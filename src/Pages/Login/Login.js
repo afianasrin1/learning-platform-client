@@ -1,5 +1,6 @@
 import React from "react";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
+import { FaGoogle, FaGithub, FaMailBulk } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const Login = () => {
   return (
@@ -98,6 +99,22 @@ const Login = () => {
             </button>
           </div>
         </form>
+
+        <div className="btn-group btn-group-vertical  w-full justify-center ">
+          <button className="btn btn-active btn-outline btn-accent mb-3">
+            <FaGoogle /> Login With Google
+          </button>
+          <button className="btn btn-outline btn-accent mb-3">
+            <FaMailBulk /> Login With Email & Password
+          </button>
+          <button className="btn btn-outline btn-accent mb-3 ">
+            <FaGithub /> Login With Github
+          </button>
+        </div>
+
+        <p class="text-center text-sm text-gray-500">
+          No account? <Link to="/register"> Register</Link>
+        </p>
       </div>
     </div>
   );
