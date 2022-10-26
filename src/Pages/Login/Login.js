@@ -2,7 +2,33 @@ import React from "react";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { FaGoogle, FaGithub, FaMailBulk } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 const Login = () => {
+  const { providerLogin } = useContext(AuthContext);
+
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+
+  const handleGoogleLogin = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleGithubLogin = () => {
+    providerLogin(githubProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -12,18 +38,9 @@ const Login = () => {
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign in to your account
+          <h2 className="mt-6 mb-5 text-center text-3xl font-bold tracking-tight text-gray-900">
+            Login to your account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{" "}
-            <Link
-              to="#"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              start your 14-day free trial
-            </Link>
-          </p>
         </div>
         <form className="mt-8 space-y-6" action="#" method="POST">
           <input type="hidden" name="remember" defaultValue="true" />
@@ -99,22 +116,46 @@ const Login = () => {
             </button>
           </div>
         </form>
-
+        <p className="mt-2 text-center text-lg  text-indigo-600">
+          Or{" "}
+          <Link
+            to="#"
+            className="font-medium text-indigo-600 hover:text-indigo-300"
+          >
+            Continue With
+          </Link>
+        </p>
         <div className="btn-group btn-group-vertical  w-full justify-center ">
-          <button className="btn btn-active btn-outline btn-accent mb-3">
+          <button
+            onClick={handleGoogleLogin}
+            className="btn btn-active btn-outline btn-accent mb-3"
+          >
             <FaGoogle /> Login With Google
           </button>
           <button className="btn btn-outline btn-accent mb-3">
             <FaMailBulk /> Login With Email & Password
           </button>
-          <button className="btn btn-outline btn-accent mb-3 ">
+          <button
+            onClick={handleGithubLogin}
+            className="btn btn-outline btn-accent mb-3 "
+          >
             <FaGithub /> Login With Github
           </button>
         </div>
 
-        <p class="text-center text-sm text-gray-500">
-          No account? <Link to="/register"> Register</Link>
+        <p className="text-center text-sm text-gray-500">
+          No account?<Link to="/register"> Register</Link>
         </p>
+        {/* {success && <p>Successfully login</p>}
+          <p>
+            Forget password?please Reset
+            <button
+              onClick={handleForgetPassword}
+              className="btn btn-secondary text-2xl border-collapse"
+            >
+              Reset Password
+            </button>
+          </p> */}
       </div>
     </div>
   );
