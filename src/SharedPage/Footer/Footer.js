@@ -96,10 +96,10 @@ const Footer = () => {
               </svg>
             </Link>
           </div>
-          <p className="mt-4 text-sm text-gray-500">
+          {/* <p className="mt-4 text-sm text-gray-500">
             Bacon ipsum dolor amet short ribs pig sausage prosciutto chicken
             spare ribs salami.
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row">
