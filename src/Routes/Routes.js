@@ -7,6 +7,7 @@ import DefaultPage from "../DefaultPage/DefaultPage";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import ErrorPage from "../Others/ErrorPage/ErrorPage";
+import Category from "../Pages/Category/Category";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -20,10 +21,16 @@ export const router = createBrowserRouter([
       {
         path: "/home",
         element: <DefaultPage />,
+        loader: () => fetch("Data.json"),
       },
       {
         path: "/",
         element: <Courses />,
+        loader: ({ params }) => fetch(`categories.json/${params.id}`),
+      },
+      {
+        path: "/category/:id",
+        element: <Category />,
       },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },

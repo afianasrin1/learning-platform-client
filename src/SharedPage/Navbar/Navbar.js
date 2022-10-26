@@ -1,12 +1,20 @@
 import React from "react";
-// import { useContext } from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import navbar from "../../images/navbar.jpg";
+import { FaUser } from "react-icons/fa";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const { user } = useContext(AuthContext);
+  const { user, logOut, error, setError } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <div class="bg-gray-900">
       <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -202,7 +210,7 @@ const Navbar = () => {
                       </li>
                       <li>
                         <Link
-                          href="/register"
+                          to="/register"
                           class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                           aria-label="Register"
                           title="Register"
@@ -221,6 +229,37 @@ const Navbar = () => {
                         </Link>
                       </li>
                     </ul>
+                    <nav>
+                      <>
+                        {user?.id ? (
+                          <>
+                            <span>{user?.displayName}</span>
+                            <button
+                              onClick={handleLogOut}
+                              className="btn btn-outline btn-primary"
+                            >
+                              Log out
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <Link to="/login"> Login </Link>
+                            <Link to="/register"> Register </Link>
+                          </>
+                        )}
+                      </>
+                      <Link to="/profile">
+                        {user?.photoURL ? (
+                          <img
+                            style={{ height: "30px" }}
+                            src={user?.photoURL}
+                            alt=""
+                          />
+                        ) : (
+                          <FaUser></FaUser>
+                        )}
+                      </Link>
+                    </nav>
                   </nav>
                 </div>
               </div>

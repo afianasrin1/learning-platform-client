@@ -1,7 +1,58 @@
 import React from "react";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 const Register = () => {
+  const [accepted, setAccepted] = useState(false);
+  const { createUser, updateUserProfile, emailVerified, setError } =
+    useContext(AuthContext);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const photoURL = form.photoURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setError("");
+        form.reset();
+
+        handleUpdateUserProfile(name, photoURL);
+        handleEmailVerified();
+        toast.success("please verify your email address before login");
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error.message);
+      });
+  };
+
+  const handleUpdateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    updateUserProfile(profile)
+      .then(() => {})
+      .catch((error) => console.error(error));
+  };
+  const handleEmailVerified = () => {
+    emailVerified()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleAccepted = (event) => {
+    setAccepted(event.target.checked);
+  };
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -15,7 +66,12 @@ const Register = () => {
             Please Registration
           </h2>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form
+          onClick={handleSubmit}
+          className="mt-8 space-y-6"
+          action="#"
+          method="POST"
+        >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
@@ -82,6 +138,7 @@ const Register = () => {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
+                onClick={handleAccepted}
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               />
               <label
@@ -107,12 +164,6 @@ const Register = () => {
               type="submit"
               className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <LockClosedIcon
-                  className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                  aria-hidden="true"
-                />
-              </span>
               Register
             </button>
           </div>

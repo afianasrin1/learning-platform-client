@@ -5,11 +5,38 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+
+import toast from "react-hot-toast";
 const Login = () => {
-  const { providerLogin } = useContext(AuthContext);
+  const { providerLogin, login, error, setError } = useContext(AuthContext);
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    login(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+        setError("");
+        if (user.emailVerified) {
+        } else {
+          toast.error("your email is not verified,pls verified email ");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error.message);
+      });
+    // .finally(() => {
+    //   setLoading(false);
+    // });
+  };
 
   const handleGoogleLogin = () => {
     providerLogin(googleProvider)
@@ -42,7 +69,13 @@ const Login = () => {
             Login to your account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form
+          onSubmit={handleSubmit}
+          handleSubmit
+          className="mt-8 space-y-6"
+          action="#"
+          method="POST"
+        >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <div>

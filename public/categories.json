@@ -1,34 +1,26 @@
 [
   {
-    "id": "01",
-    "name": "Breaking News"
+    "id": "1",
+    "name": "Introducing to JavaScript"
   },
   {
-    "id": "02",
-    "name": "Regular News"
+    "id": "2",
+    "name": "Python Django"
   },
   {
-    "id": "03",
-    "name": "International News"
+    "id": "3",
+    "name": "Node JS Course"
   },
   {
-    "id": "04",
-    "name": "Sports"
+    "id": "4",
+    "name": "React Course"
   },
   {
-    "id": "05",
-    "name": "Entertainment"
+    "id": "5",
+    "name": "Introducing to PHP"
   },
   {
-    "id": "06",
-    "name": "Culture"
-  },
-  {
-    "id": "07",
-    "name": "Arts"
-  },
-  {
-    "id": "08",
-    "name": "All Courses"
+    "id": "6",
+    "name": "Angular Framework"
   }
 ]
