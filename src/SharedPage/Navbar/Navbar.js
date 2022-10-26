@@ -67,7 +67,7 @@ const Navbar = () => {
           <ul class="flex items-center hidden space-x-8 lg:flex">
             <li>
               <Link
-                to="/"
+                to="/login"
                 aria-label="Login"
                 title="Login"
                 class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
@@ -77,12 +77,12 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to="/"
+                to="/register"
                 class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                aria-label="Logout"
-                title="Logout"
+                aria-label="LRegister"
+                title="Register"
               >
-                Logout
+                Register
               </Link>
             </li>
           </ul>
@@ -200,12 +200,12 @@ const Navbar = () => {
                       </li>
                       <li>
                         <Link
-                          href="/logout"
+                          href="/register"
                           class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                          aria-label="Logout"
-                          title="Logout"
+                          aria-label="Register"
+                          title="Register"
                         >
-                          Logout
+                          Register
                         </Link>
                       </li>
                     </ul>
