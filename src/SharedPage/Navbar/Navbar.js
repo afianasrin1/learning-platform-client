@@ -30,7 +30,7 @@ const Navbar = () => {
             >
               <img className="w-10 rounded-full" src={navbar} alt="" />
               <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
-                P & A related Course
+                Learning Web Development
               </span>
             </Link>
             <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -76,14 +76,14 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <div>
+          <div className="flex items-center justify-between gap-5">
             <>
               {user?.uid ? (
                 <div className="text-white">
                   <span>{user?.displayName}</span>
                   <button
                     onClick={handleLogOut}
-                    className="btn btn-outline btn-primary"
+                    className="btn btn-outline btn-success"
                   >
                     Logout
                   </button>

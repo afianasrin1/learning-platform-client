@@ -7,7 +7,7 @@ import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 const Register = () => {
   const [accepted, setAccepted] = useState(false);
-  const { createUser, updateUserProfile, emailVerified, setError } =
+  const { createUser, updateUserProfile, emailVerified, error, setError } =
     useContext(AuthContext);
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -126,21 +126,25 @@ const Register = () => {
               />
             </div>
           </div>
-
+          <p className="text-red-500"> {error}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
-                id="remember-me"
-                name="remember-me"
+                id="Accept Terms and condition"
+                name="Accept Terms and condition"
                 type="checkbox"
+                onClick={handleAccepted}
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               />
               <label
-                htmlFor="remember-me"
+                htmlFor="Accept Terms and condition"
                 className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me
-              </label>
+              ></label>
+              {
+                <>
+                  Accept <Link to="terms"> Terms and condition</Link>
+                </>
+              }
             </div>
 
             <div className="text-sm">
@@ -156,6 +160,7 @@ const Register = () => {
           <div>
             <button
               type="submit"
+              disabled={!accepted}
               className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -164,7 +169,7 @@ const Register = () => {
                   aria-hidden="true"
                 />
               </span>
-              Login
+              Register
             </button>
           </div>
         </form>

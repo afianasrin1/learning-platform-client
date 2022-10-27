@@ -10,6 +10,7 @@ import ErrorPage from "../Others/ErrorPage/ErrorPage";
 import Category from "../Pages/Category/Category";
 // import CoursesDetails from "../Pages/CoursesDetails/CoursesDetails";
 import Courses from "../Pages/Courses/Courses";
+import TermsAndCondition from "../Others/TermsAndCondition/TermsAndCondition";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -45,6 +46,7 @@ export const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/faqs", element: <FAQs /> },
       { path: "/blog", element: <Blog /> },
+      { path: "/terms", element: <TermsAndCondition /> },
     ],
   },
 ]);

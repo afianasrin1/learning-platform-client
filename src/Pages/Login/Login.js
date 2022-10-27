@@ -103,7 +103,7 @@ const Login = () => {
               />
             </div>
           </div>
-
+          <p className="text-red-500"> {error}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
