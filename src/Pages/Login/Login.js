@@ -1,7 +1,7 @@
 import React from "react";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { FaGoogle, FaGithub, FaMailBulk } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
@@ -11,6 +11,10 @@ import toast from "react-hot-toast";
 const Login = () => {
   const { providerLogin, login, error, setError } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
   const handleSubmit = (event) => {
@@ -24,9 +28,10 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         form.reset();
-        navigate("/");
+
         setError("");
         if (user.emailVerified) {
+          navigate(from, { replace: true });
         } else {
           toast.error("your email is not verified,pls verified email ");
         }

@@ -19,14 +19,18 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const providerLogin = (provider) => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const login = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   const updateUserProfile = (profile) => {
@@ -37,16 +41,17 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
+    setLoading(true);
     signOut(auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (loginUser) => {
       console.log("use state change", loginUser);
-      setUser(loginUser);
-      // if (loginUser === null || loginUser.emailVerified) {
-      //   setUser(loginUser);
-      // }
+
+      if (loginUser === null || loginUser.emailVerified) {
+        setUser(loginUser);
+      }
     });
     return () => {
       unsubscribe();
@@ -63,6 +68,8 @@ const AuthProvider = ({ children }) => {
     setError,
     emailVerified,
     updateUserProfile,
+    loading,
+    setLoading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

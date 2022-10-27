@@ -11,6 +11,8 @@ import Category from "../Pages/Category/Category";
 // import CoursesDetails from "../Pages/CoursesDetails/CoursesDetails";
 import Courses from "../Pages/Courses/Courses";
 import TermsAndCondition from "../Others/TermsAndCondition/TermsAndCondition";
+import Profile from "../Pages/Profile/Profile";
+import PrivatesRoutes from "../Pages/PrivateRoutes/PrivatesRoutes";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -47,6 +49,14 @@ export const router = createBrowserRouter([
       { path: "/faqs", element: <FAQs /> },
       { path: "/blog", element: <Blog /> },
       { path: "/terms", element: <TermsAndCondition /> },
+      {
+        path: "profile",
+        element: (
+          <PrivatesRoutes>
+            <Profile />
+          </PrivatesRoutes>
+        ),
+      },
     ],
   },
 ]);
