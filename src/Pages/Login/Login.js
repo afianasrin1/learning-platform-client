@@ -9,7 +9,8 @@ import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { providerLogin, login, error, setError } = useContext(AuthContext);
+  const { providerLogin, login, error, setError, loading, setLoading } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -39,10 +40,10 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
         setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    // .finally(() => {
-    //   setLoading(false);
-    // });
   };
 
   const handleGoogleLogin = () => {
