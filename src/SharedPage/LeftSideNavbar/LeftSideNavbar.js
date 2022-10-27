@@ -19,7 +19,7 @@ const LeftSideNavbar = () => {
       <div className="  text-slate-900">
         {categories.map((category) => (
           <li key={category.id}>
-            <Link to={`/category/${category.id}`}>{category.name}</Link>
+            <Link to={`/category/${category.id}`}>{category.coursesName}</Link>
           </li>
         ))}
       </div>

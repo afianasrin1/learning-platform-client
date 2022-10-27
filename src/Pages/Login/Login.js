@@ -1,15 +1,16 @@
 import React from "react";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { FaGoogle, FaGithub, FaMailBulk } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 import toast from "react-hot-toast";
+
 const Login = () => {
   const { providerLogin, login, error, setError } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
   const handleSubmit = (event) => {
@@ -23,6 +24,7 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         form.reset();
+        navigate("/");
         setError("");
         if (user.emailVerified) {
         } else {
@@ -69,13 +71,7 @@ const Login = () => {
             Login to your account
           </h2>
         </div>
-        <form
-          onSubmit={handleSubmit}
-          handleSubmit
-          className="mt-8 space-y-6"
-          action="#"
-          method="POST"
-        >
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <div>

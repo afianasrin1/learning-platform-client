@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import navbar from "../../images/navbar.jpg";
-import { FaFacebook, FaTwitter } from "react-icons/fa";
+
 const Footer = () => {
   return (
     <div className="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -15,13 +15,16 @@ const Footer = () => {
           >
             <img className="w-10 rounded-full" src={navbar} alt="" />
             <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-              P & A related Course
+              Learning Web Development
             </span>
           </Link>
           <div className="mt-6 lg:max-w-sm">
             <p className="text-sm text-gray-800">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam.
+              Web development is the building and maintenance of websites; it's
+              the work that happens behind the scenes to make a website look
+              great, work fast and perform well with a seamless user experience.
+              Web developers, or 'devs', do this by using a variety of coding
+              languages
             </p>
           </div>
         </div>
@@ -97,14 +100,13 @@ const Footer = () => {
             </Link>
           </div>
           <p className="mt-4 text-sm text-gray-500">
-            Bacon ipsum dolor amet short ribs pig sausage prosciutto chicken
-            spare ribs salami.
+            Web development is the building and maintenance of websites.
           </p>
         </div>
       </div>
       <div className="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row">
         <p className="text-sm text-gray-600">
-          © Copyright 2022 Courses. All rights reserved.
+          © Copyright 2022 . All rights reserved.
         </p>
       </div>
     </div>

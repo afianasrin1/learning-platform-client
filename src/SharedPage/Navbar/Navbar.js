@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import navbar from "../../images/navbar.jpg";
 import { FaUser } from "react-icons/fa";
+import LeftSideNavbar from "../LeftSideNavbar/LeftSideNavbar";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, logOut, error, setError } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -74,29 +76,34 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <ul class="flex items-center hidden space-x-8 lg:flex">
-            <li>
-              <Link
-                to="/login"
-                aria-label="Login"
-                title="Login"
-                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-              >
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/register"
-                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                aria-label="LRegister"
-                title="Register"
-              >
-                Register
-              </Link>
-            </li>
-          </ul>
-          <div class="lg:hidden">
+          <div>
+            <>
+              {user?.uid ? (
+                <div className="text-white">
+                  <span>{user?.displayName}</span>
+                  <button
+                    onClick={handleLogOut}
+                    className="btn btn-outline btn-primary"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div className="text-white">
+                  <Link to="/login"> Login </Link>
+                  <Link to="/register"> Register </Link>
+                </div>
+              )}
+            </>
+            <Link to="/profile">
+              {user?.photoURL ? (
+                <img style={{ height: "30px" }} src={user?.photoURL} alt="" />
+              ) : (
+                <FaUser className="text-white"></FaUser>
+              )}
+            </Link>
+          </div>
+          <div className="lg:hidden z-50">
             <button
               aria-label="Open Menu"
               title="Open Menu"
@@ -229,16 +236,16 @@ const Navbar = () => {
                         </Link>
                       </li>
                     </ul>
-                    <nav>
+                    <div>
                       <>
-                        {user?.id ? (
+                        {user?.uid ? (
                           <>
                             <span>{user?.displayName}</span>
                             <button
                               onClick={handleLogOut}
                               className="btn btn-outline btn-primary"
                             >
-                              Log out
+                              Logout
                             </button>
                           </>
                         ) : (
@@ -256,10 +263,13 @@ const Navbar = () => {
                             alt=""
                           />
                         ) : (
-                          <FaUser></FaUser>
+                          <FaUser className="text-white"></FaUser>
                         )}
                       </Link>
-                    </nav>
+                    </div>
+                    <div>
+                      <LeftSideNavbar></LeftSideNavbar>
+                    </div>
                   </nav>
                 </div>
               </div>

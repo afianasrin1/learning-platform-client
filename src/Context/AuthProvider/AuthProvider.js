@@ -42,12 +42,15 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (loginUser) => {
-      console.log("use state change");
-      if (loginUser === null || loginUser.emailVerified) {
-        setUser(loginUser);
-      }
+      console.log("use state change", loginUser);
+      setUser(loginUser);
+      // if (loginUser === null || loginUser.emailVerified) {
+      //   setUser(loginUser);
+      // }
     });
-    unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, []);
   const authInfo = {
     logOut,

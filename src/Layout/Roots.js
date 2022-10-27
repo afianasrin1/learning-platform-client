@@ -10,7 +10,7 @@ const Roots = () => {
     <div>
       <Navbar />
       <div className="flex">
-        <div className="flex-auto w-3/12">
+        <div className="flex-auto hidden lg:block w-3/12">
           <LeftSideNavbar />
         </div>
         <div className="flex-auto w-9/12">

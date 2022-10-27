@@ -21,11 +21,13 @@ const Blog = () => {
             title="Jingle Bells"
             className="inline-block mb-3 text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
           >
-            Jingle Bells
+            What is CORS used for?
           </a>
           <p className="mb-5 text-gray-700">
-            Some pilots get picked and become television programs. Some don't,
-            become nothing.
+            Cross-Origin Resource Sharing (CORS) is an HTTP-header based
+            mechanism that allows a server to indicate any origins (domain,
+            scheme, or port) other than its own from which a browser should
+            permit loading resources
           </p>
           <div className="flex items-center">
             <a href="/" aria-label="Author" title="Author" className="mr-3">
@@ -67,11 +69,21 @@ const Blog = () => {
             title="Happy new Year"
             className="inline-block mb-3 text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
           >
-            Happy new Year
+            Why are you using firebase? What other options do you have to
+            implement authentication?
           </a>
           <p className="mb-5 text-gray-700">
-            Pommy ipsum smeg head whizz morris dancers come hither, bugger
-            codswallop gob. Taking the mick middle class bog.
+            The Firebase Realtime Database lets you build rich, collaborative
+            applications by allowing secure access to the database directly from
+            client-side code. Data is persisted locally, and even while offline,
+            realtime events continue to fire, giving the end user a responsive
+            experience.
+            <br />
+            Firebase Authentication provides backend services, easy-to-use SDKs,
+            and ready-made UI libraries to authenticate users to your app. It
+            supports authentication using passwords, phone numbers, popular
+            federated identity providers like Google, Facebook and Twitter, and
+            more.
           </p>
           <div className="flex items-center">
             <a href="/" aria-label="Author" title="Author" className="mr-3">
@@ -103,6 +115,60 @@ const Blog = () => {
               className="transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
               aria-label="Category"
             >
+              weekend
+            </a>{" "}
+            <span className="text-gray-600">— 1 Feb 2020</span>
+          </p>
+          <a
+            href="/"
+            aria-label="Article"
+            title="Jingle Bells"
+            className="inline-block mb-3 text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
+          >
+            What is Node? How does Node work?
+          </a>
+          <p className="mb-5 text-gray-700">
+            Node.js is an open-source, cross-platform, back-end JavaScript
+            runtime environment that runs on a JavaScript Engine (i.e. V8
+            engine) and executes JavaScript code outside a web browser, which
+            was designed to build scalable network applications.
+            <br />
+            Node JS Web Server internally maintains a Limited Thread pool to
+            provide services to the Client Requests. Node JS Web Server receives
+            those requests and places them into a Queue. It is known as “Event
+            Queue”. Node JS Web Server internally has a Component, known as
+            “Event Loop”.
+          </p>
+          <div className="flex items-center">
+            <a href="/" aria-label="Author" title="Author" className="mr-3">
+              <img
+                src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+                alt="avatar"
+                className="object-cover w-10 h-10 rounded-full shadow-sm"
+              />
+            </a>
+            <div>
+              <a
+                href="/"
+                aria-label="Author"
+                title="Author"
+                className="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
+              >
+                Vasile Melinte
+              </a>
+              <p className="text-sm font-medium leading-4 text-gray-600">
+                Author
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="p-8 bg-white border rounded shadow-sm">
+          <p className="mb-3 text-xs font-semibold tracking-wide uppercase">
+            <a
+              href="/"
+              className="transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
+              aria-label="Category"
+            >
               programming
             </a>{" "}
             <span className="text-gray-600">— 28 Dec 2020</span>
@@ -113,11 +179,14 @@ const Blog = () => {
             title="Why i love C++"
             className="inline-block mb-3 text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
           >
-            Why i love C++
+            How does the private route work?
           </a>
           <p className="mb-5 text-gray-700">
-            Sportacus andrew weatherall goose Refined gentlemen super mario des
-            lynam alpha trion zap rowsdower.
+            The private route component is similar to the public route, the only
+            change is that redirect URL and authenticate condition. If the user
+            is not authenticated he will be redirected to the login page and the
+            user can only access the authenticated routes If he is authenticated
+            (Logged in).
           </p>
           <div className="flex items-center">
             <a href="/" aria-label="Author" title="Author" className="mr-3">
