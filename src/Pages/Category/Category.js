@@ -1,16 +1,15 @@
 import React from "react";
-// import { useLoaderData } from "react-router-dom";
-// import CourseCard from "../../SharedPage/CourseCard/CourseCard";
+import { useLoaderData } from "react-router-dom";
+import CourseSummary from "../CourseSummary/CourseSummary";
 
 const Category = () => {
-  // const categoryCourses = useLoaderData();
-  return (
-    <div>
-      {/* {categoryCourses.map((course) => (
-        <CourseCard key={course.id} course={course}></CourseCard>
-      ))} */}
-    </div>
-  );
+	const categoryCourses = useLoaderData();
+
+	return (
+		<div>
+			<CourseSummary courseSummary={categoryCourses} />
+		</div>
+	);
 };
 
 export default Category;

@@ -14,11 +14,6 @@ const PrivatesRoutes = ({ children }) => {
           value="10"
           max="100"
         ></progress>
-        <progress
-          className="progress progress-warning w-56"
-          value="40"
-          max="100"
-        ></progress>
       </>
     );
   }

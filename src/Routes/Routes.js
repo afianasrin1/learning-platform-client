@@ -13,6 +13,8 @@ import Courses from "../Pages/Courses/Courses";
 import TermsAndCondition from "../Others/TermsAndCondition/TermsAndCondition";
 import Profile from "../Pages/Profile/Profile";
 import PrivatesRoutes from "../Pages/PrivateRoutes/PrivatesRoutes";
+import CoursesDetails from "../Pages/CoursesDetails/CoursesDetails";
+import AllCourses from "../Pages/AllCourses/AllCourses";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -27,21 +29,15 @@ export const router = createBrowserRouter([
       {
         path: "/home",
         element: <DefaultPage />,
-        loader: async () => fetch("http://localhost:5000/courses"),
+        loader: async () =>
+          fetch(
+            "https://learning-platform-server-side-three.vercel.app/courses"
+          ),
       },
       {
         path: "/courses/:id",
 
-        loader: async ({ params }) => {
-          return fetch(`http://localhost:5000/courses/${params.id}`);
-        },
         element: <Courses />,
-      },
-      {
-        path: "/category/:id",
-        element: <Category />,
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/courses-categories/1${params.id}`),
       },
 
       { path: "/login", element: <Login /> },
@@ -49,6 +45,41 @@ export const router = createBrowserRouter([
       { path: "/faqs", element: <FAQs /> },
       { path: "/blog", element: <Blog /> },
       { path: "/terms", element: <TermsAndCondition /> },
+      {
+        path: "/courses",
+        element: <Courses />,
+        children: [
+          {
+            path: "/courses/category/:id",
+            element: <Category />,
+            loader: ({ params }) =>
+              fetch(
+                `https://learning-platform-server-side-three.vercel.app/courses-categories/${params.id}`
+              ),
+          },
+          {
+            path: "/courses/details/:id",
+            element: (
+              <PrivatesRoutes>
+                <CoursesDetails />
+              </PrivatesRoutes>
+            ),
+            loader: async ({ params }) => {
+              return fetch(
+                `https://learning-platform-server-side-three.vercel.app/courses/${params.id}`
+              );
+            },
+          },
+          {
+            path: "/courses/",
+            element: <AllCourses />,
+            loader: () =>
+              fetch(
+                "https://learning-platform-server-side-three.vercel.app/courses"
+              ),
+          },
+        ],
+      },
       {
         path: "profile",
         element: (
