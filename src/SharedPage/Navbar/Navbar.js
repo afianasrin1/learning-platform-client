@@ -27,9 +27,14 @@ const Navbar = () => {
 							aria-label="P & A related Course"
 							title="P & A related Course"
 							className="inline-flex items-center mr-8">
-							<img className="w-10 rounded-full" src={navbar} alt="" />
-							<span className="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
+							<img className="w-10  rounded-full" src={navbar} alt="" />
+							<span className="ml-2 hidden sm:block text-xl font-bold tracking-wide text-gray-100 uppercase">
 								Learning Web Development
+							</span>
+							<span
+								title="Learning Web Development"
+								className="ml-2 sm:hidden text-xl font-bold tracking-wide text-gray-100 uppercase">
+								LWD
 							</span>
 						</Link>
 						<ul className="flex items-center hidden space-x-8 lg:flex">
@@ -72,13 +77,29 @@ const Navbar = () => {
 						</ul>
 					</div>
 					<div className="flex items-center justify-between gap-5">
+						<div className="ml-4 pr-3 md:block hidden">
+							<label
+								for="default-toggle"
+								class="inline-flex relative items-center cursor-pointer">
+								<input
+									type="checkbox"
+									value=""
+									id="default-toggle"
+									class="sr-only peer"
+								/>
+								<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+								<span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+									Toggle
+								</span>
+							</label>
+						</div>
 						<>
 							{user?.uid ? (
-								<div className="text-white">
-									<span>{user?.displayName}</span>
+								<div className="text-white flex items-center gap-3">
+									<span className="hidden md:block">{user?.displayName}</span>
 									<button
 										onClick={handleLogOut}
-										className="btn btn-outline btn-success">
+										className="btn hidden sm:block btn-outline btn-success">
 										Logout
 									</button>
 								</div>
@@ -89,13 +110,24 @@ const Navbar = () => {
 								</div>
 							)}
 						</>
-						<Link to="/profile">
-							{user?.photoURL ? (
-								<img style={{ height: "30px" }} src={user?.photoURL} alt="" />
+						<div className="cursor-pointer w-10">
+							{user?.uid ? (
+								<Link to="/profile">
+									<img
+										title={user.displayName}
+										className="w-10 h-10  rounded-full"
+										src={user?.photoURL}
+										alt=""
+									/>
+								</Link>
 							) : (
-								<FaUser className="text-white"></FaUser>
+								<div title="No user found">
+									<Link to="/profile">
+										<FaUser />
+									</Link>
+								</div>
 							)}
-						</Link>
+						</div>
 					</div>
 					<div className="lg:hidden z-50">
 						<button
@@ -189,34 +221,6 @@ const Navbar = () => {
 													title="Blog"
 													className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
 													Blog
-												</Link>
-											</li>
-
-											<li>
-												<Link
-													href="/login"
-													aria-label="Login"
-													title="Login"
-													className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
-													Login
-												</Link>
-											</li>
-											<li>
-												<Link
-													to="/register"
-													className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-													aria-label="Register"
-													title="Register">
-													Register
-												</Link>
-											</li>
-											<li>
-												<Link
-													href="/register"
-													className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-													aria-label="Register"
-													title="Register">
-													Register
 												</Link>
 											</li>
 										</ul>

@@ -1,6 +1,5 @@
-import React from "react";
-import { LockClosedIcon } from "@heroicons/react/20/solid";
-import { FaGoogle, FaGithub, FaMailBulk } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaGoogle, FaGithub } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
@@ -9,193 +8,120 @@ import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { providerLogin, login, error, setError, loading, setLoading } =
-    useContext(AuthContext);
-  const navigate = useNavigate();
-  const location = useLocation();
+	const { singInUser, providerLogin } = useContext(AuthContext);
+	const [errors, setErrors] = useState(null);
+	const location = useLocation();
+	const navigate = useNavigate();
+	const from = location.state?.from?.pathname || "/";
+	const loginUser = event => {
+		event.preventDefault();
+		const form = event.target;
+		const email = form.email.value;
+		const password = form.password.value;
+		singInUser(email, password)
+			.then(result => {
+				const user = result.user;
+				navigate(from, { replace: true });
+				setErrors("");
+			})
+			.catch(error => {
+				console.error(error);
+				setErrors(error.message);
+			});
+	};
 
-  const from = location.state?.from?.pathname || "/";
-
-  const googleProvider = new GoogleAuthProvider();
-  const githubProvider = new GithubAuthProvider();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log(email, password);
-    login(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        form.reset();
-
-        setError("");
-        if (user.emailVerified) {
-          navigate(from, { replace: true });
-        } else {
-          toast.error("your email is not verified,pls verified email ");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const handleGoogleLogin = () => {
-    providerLogin(googleProvider)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        navigate(from, { replace: true });
-      })
-      .catch((error) => console.error(error));
-  };
-
-  const handleGithubLogin = () => {
-    providerLogin(githubProvider)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        navigate(from, { replace: true });
-      })
-      .catch((error) => console.error(error));
-  };
-
-  return (
-    <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
-        <div>
-          <img
-            className="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
-          <h2 className="mt-6 mb-5 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Login to your account
-          </h2>
-        </div>
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          <input type="hidden" name="remember" defaultValue="true" />
-          <div className="-space-y-px rounded-md shadow-sm">
-            <div>
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Email address"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Password"
-              />
-            </div>
-          </div>
-          <p className="text-red-500"> {error}</p>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              />
-              <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <Link
-                to="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </Link>
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <LockClosedIcon
-                  className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                  aria-hidden="true"
-                />
-              </span>
-              Login
-            </button>
-          </div>
-        </form>
-        <p className="mt-2 text-center text-lg  text-indigo-600">
-          Or{" "}
-          <Link
-            to="#"
-            className="font-medium text-indigo-600 hover:text-indigo-300"
-          >
-            Continue With
-          </Link>
-        </p>
-        <div className="btn-group btn-group-vertical  w-full justify-center ">
-          <button
-            onClick={handleGoogleLogin}
-            className="btn btn-active btn-outline btn-accent mb-3"
-          >
-            <FaGoogle /> Login With Google
-          </button>
-          <button className="btn btn-outline btn-accent mb-3">
-            <FaMailBulk /> Login With Email & Password
-          </button>
-          <button
-            onClick={handleGithubLogin}
-            className="btn btn-outline btn-accent mb-3 "
-          >
-            <FaGithub /> Login With Github
-          </button>
-        </div>
-
-        <p className="text-center text-sm text-gray-500">
-          No account?<Link to="/register"> Register</Link>
-        </p>
-        {/* {success && <p>Successfully login</p>}
-          <p>
-            Forget password?please Reset
-            <button
-              onClick={handleForgetPassword}
-              className="btn btn-secondary text-2xl border-collapse"
-            >
-              Reset Password
-            </button>
-          </p> */}
-      </div>
-    </div>
-  );
+	const googleProvider = new GoogleAuthProvider();
+	const continueWithGoogle = () => {
+		providerLogin(googleProvider)
+			.then(result => {
+				const user = result.user;
+				console.log(user);
+				navigate(from, { replace: true });
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	};
+	const githubProvider = new GithubAuthProvider();
+	const continueWithGithub = () => {
+		providerLogin(githubProvider)
+			.then(result => {
+				const user = result.user;
+				console.log(user);
+				navigate(from, { replace: true });
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	};
+	return (
+		<div className="flex justify-center my-8">
+			<div className="bg-white rounded shadow-2xl p-7 sm:p-10">
+				{errors && <p className="text-red-500">{errors}</p>}
+				<h3 className="mb-4 text-xl sm:pt-3 font-semibold sm:text-center sm:mb-6 sm:text-2xl">
+					Login
+				</h3>
+				<form onSubmit={loginUser}>
+					<div className="mb-1 sm:mb-2">
+						<label htmlFor="email" className="inline-block mb-1 font-medium">
+							E-mail
+						</label>
+						<input
+							placeholder="john.doe@example.org"
+							required
+							type="text"
+							className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+							id="email"
+							name="email"
+						/>
+					</div>
+					<div className="mb-1 sm:mb-2">
+						<label htmlFor="password" className="inline-block mb-1 font-medium">
+							Password
+						</label>
+						<input
+							placeholder="type your password"
+							required
+							type="password"
+							className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+							id="password"
+							name="password"
+						/>
+					</div>
+					<div className="mt-4 mb-2 sm:mb-4">
+						<button
+							type="submit"
+							className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide bg-green-700 text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-green-600 focus:shadow-outline focus:outline-none">
+							Login
+						</button>
+					</div>
+					<p className="text-xs text-gray-600 sm:text-sm">
+						Don't have an Account ? please{" "}
+						<Link
+							className="text-blue-400  border-b-2 font-bold hover:border-none border-gray-400"
+							to="/register">
+							Register
+						</Link>
+					</p>
+					<div className="text-center text-gray-600">
+						<p>-----or-----</p>
+						<div className="flex gap-4 justify-center pt-3">
+							<p>
+								<button onClick={continueWithGoogle}>
+									<FaGoogle />
+								</button>
+							</p>
+							<p>
+								<button onClick={continueWithGithub}>
+									<FaGithub />
+								</button>
+							</p>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	);
 };
 
 export default Login;

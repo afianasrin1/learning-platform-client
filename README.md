@@ -1,6 +1,6 @@
 #website link : https://computer-science-courses.web.app
 
-#this website is about webdevelopment course react, css, javascript etc
+#this website is about web development course react, css, javascript etc
 
 #use various think for build this website
 
@@ -12,10 +12,8 @@
 
 #icon : hero icon
 
-COURSES API LINK:
-Get all courses: https://learning-platform-server-side-three.vercel.app/courses
+COURSES API LINK: Get all courses: https://learning-platform-server-side-three.vercel.app/courses
 
 Get category : https://learning-platform-server-side-three.vercel.app/courses-categories
 
-Get details by id: https://learning-platform-server-side-three.vercel.app/courses/${params.id}
-Example:https://learning-platform-server-side-three.vercel.app/courses/1
+Get details by id: https://learning-platform-server-side-three.vercel.app/courses/${params.id} Example:https://learning-platform-server-side-three.vercel.app/courses/1
